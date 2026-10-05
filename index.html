@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Melody Music</title>
+
+<style>
+
+/* =========================
+   BUTTERFLY ANIMATION
+========================= */
+
+.butterfly-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.butterfly-animation {
+    position: absolute;
+    top: 15px;
+    left: -60px;
+    z-index: 5;
+
+    font-size: 45px;
+
+    animation: butterflyFly 6s linear infinite;
+    pointer-events: none;
+}
+
+/* Butterfly flying animation */
+
+@keyframes butterflyFly {
+
+    0% {
+        left: -60px;
+        top: 20px;
+        transform: rotate(-15deg);
+    }
+
+    25% {
+        left: 25%;
+        top: 80px;
+        transform: rotate(15deg);
+    }
+
+    50% {
+        left: 55%;
+        top: 30px;
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        left: 75%;
+        top: 100px;
+        transform: rotate(15deg);
+    }
+
+    100% {
+        left: 110%;
+        top: 40px;
+        transform: rotate(-15deg);
+    }
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0d0d16;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.75)),
+        url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.welcome-content {
+    animation: welcomeZoom 2s ease;
+    z-index: 2;
+}
+
+.music-icon {
+    font-size: 75px;
+    animation: musicFloat 2s infinite ease-in-out;
+    margin-bottom: 20px;
+}
+
+.welcome h1 {
+    font-size: 65px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: glowText 2s infinite alternate;
+}
+
+.welcome p {
+    margin-top: 20px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.explore-btn {
+    margin-top: 35px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 40px;
+    background: white;
+    color: #171725;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.explore-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px white;
+}
+
+/* Floating music notes */
+
+.note {
+    position: absolute;
+    font-size: 30px;
+    animation: floatNote 7s linear infinite;
+    opacity: .4;
+}
+
+.note:nth-child(1) {
+    left: 10%;
+    bottom: -50px;
+}
+
+.note:nth-child(2) {
+    left: 30%;
+    bottom: -80px;
+    animation-delay: 2s;
+}
+
+.note:nth-child(3) {
+    left: 55%;
+    bottom: -60px;
+    animation-delay: 4s;
+}
+
+.note:nth-child(4) {
+    left: 80%;
+    bottom: -70px;
+    animation-delay: 1s;
+}
+
+/* =========================
+   MUSIC SECTION
+========================= */
+
+.music-section {
+    min-height: 100vh;
+    padding: 90px 7%;
+    background: linear-gradient(135deg, #11111f, #1b1029);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 45px;
+    margin-bottom: 15px;
+    animation: titleSlide 1s ease;
+}
+
+.section-title p {
+    color: #c9c9d5;
+    font-size: 18px;
+}
+
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Music Cards */
+
+.music-card {
+    background: rgba(255,255,255,.08);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(10px);
+    transition: .5s;
+    animation: cardAppear .8s ease;
+}
+
+.music-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
+}
+
+.music-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: .5s;
+}
+
+.music-card:hover .music-image {
+    transform: scale(1.05);
+}
+
+.music-info {
+    padding: 22px;
+}
+
+.music-info h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.music-info p {
+    color: #bcbcca;
+    margin-bottom: 18px;
+}
+
+audio {
+    width: 100%;
+    height: 40px;
+}
+
+/* =========================
+   VIDEO BUTTON SECTION
+========================= */
+
+.video-area {
+    text-align: center;
+    padding: 90px 20px;
+    background: #0d0d16;
+}
+
+.video-area h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.video-area p {
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.video-btn {
+    padding: 16px 45px;
+    border: none;
+    border-radius: 50px;
+
+    background: linear-gradient(45deg, #ff4b91, #8b5cf6);
+
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .4s;
+
+    animation: buttonPulse 2s infinite;
+}
+
+.video-btn:hover {
+    transform: scale(1.08);
+}
+
+/* =========================
+   VIDEO SECTION
+========================= */
+
+.video-section {
+    display: none;
+    padding: 90px 7%;
+    background: linear-gradient(135deg, #160d20, #101525);
+}
+
+.video-section.show {
+    display: block;
+    animation: sectionReveal 1s ease;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Video Cards */
+
+.video-card {
+    background: rgba(255,255,255,.08);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    transition: .5s;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
+}
+
+.video-card video {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h3 {
+    margin-bottom: 8px;
+}
+
+.video-info p {
+    color: #aaa;
+}
+
+/* =========================
+   COMPLETE BUTTON
+========================= */
+
+.complete-area {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #101525, #170c20);
+}
+
+.complete-btn {
+    padding: 17px 55px;
+
+    border: none;
+    border-radius: 50px;
+
+    background: linear-gradient(45deg, #22c55e, #06b6d4);
+
+    color: white;
+
+    font-size: 19px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .4s;
+
+    box-shadow: 0 0 20px rgba(34,197,94,.3);
+}
+
+.complete-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 40px rgba(34,197,94,.7);
+}
+
+/* =========================
+   THANK YOU
+========================= */
+
+.thank-you {
+    display: none;
+
+    min-height: 100vh;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.75)),
+        url("https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.thank-you.show {
+    display: flex;
+    animation: thankBackground 1.5s ease;
+}
+
+.thank-content {
+    animation: thankAppear 1.5s ease;
+}
+
+.thank-image {
+    width: 180px;
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 6px solid white;
+
+    box-shadow:
+        0 0 20px white,
+        0 0 50px #ff4b91;
+
+    animation: imageFloat 3s infinite ease-in-out;
+
+    margin-bottom: 30px;
+}
+
+.thank-content .heart {
+    font-size: 55px;
+    animation: heartbeat 1.3s infinite;
+}
+
+.thank-content h2 {
+    font-size: 55px;
+    margin: 20px 0;
+
+    animation: glowText 2s infinite alternate;
+}
+
+.thank-content p {
+    font-size: 20px;
+    color: #ddd;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes welcomeZoom {
+
+    from {
+        opacity: 0;
+        transform: scale(.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+@keyframes musicFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+}
+
+@keyframes glowText {
+
+    from {
+        text-shadow: 0 0 10px white;
+    }
+
+    to {
+        text-shadow:
+        0 0 20px #ff4b91,
+        0 0 40px #8b5cf6;
+    }
+
+}
+
+@keyframes floatNote {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .5;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+
+}
+
+@keyframes titleSlide {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes buttonPulse {
+
+    0%,100% {
+        box-shadow: 0 0 0 rgba(255,75,145,0);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255,75,145,.5);
+    }
+
+}
+
+@keyframes sectionReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes thankAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(.4) rotate(-10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+@keyframes thankBackground {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+@keyframes imageFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 900px) {
+
+    .music-grid,
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .welcome h1 {
+        font-size: 45px;
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .music-grid,
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome h1 {
+        font-size: 35px;
+    }
+
+    .welcome p {
+        font-size: 15px;
+    }
+
+    .section-title h2 {
+        font-size: 34px;
+    }
+
+    .thank-content h2 {
+        font-size: 35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     WELCOME PAGE
+========================= -->
+
+<section class="welcome">
+
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♬</div>
+    <div class="note">♪</div>
+
+    <div class="welcome-content">
+
+        <div class="music-icon">🎧</div>
+
+        <h1>Welcome to Music</h1>
+
+        <p>
+            Feel the rhythm • Enjoy the melody • Live the music
+        </p>
+
+        <button class="explore-btn"
+                onclick="goToMusic()">
+
+            Explore Music 🎵
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MUSIC
+========================= -->
+
+<section class="music-section" id="music">
+
+    <div class="section-title">
+
+        <h2>🎵 Explore Music</h2>
+
+        <p>
+            Choose your favourite song and enjoy the sound
+        </p>
+
+    </div>
+
+
+    <div class="music-grid">
+
+
+        
+<!-- SONG 1 -->
+
+<div class="music-card butterfly-card">
+
+    <div class="butterfly-animation">
+        🦋
+    </div>
+
+    <img class="music-image"
+         src="https://sudhir-srinivasan.com/wp-content/uploads/2026/08/cinemaexpress-2026-06-19-fo366iuo-vishwanath-and-sons.jpg">
+
+    <div class="music-info">
+
+        <h3>ButterFly 🦋</h3>
+
+        <p>Relaxing Melody</p>
+
+        <audio controls>
+
+            <source
+                src="audio1.mpeg"
+                type="audio/mpeg">
+
+        </audio>
+
+    </div>
+
+</div>
+
+
+
+        <!-- SONG 2 -->
+
+        <div class="music-card">
+
+            <img class="music-image"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkreNnhKOGmKkRtSjgezN0BBcWEcfGl2_QRuj0mAHHbCGmstGUfEaxW2s&s=10">
+
+            <div class="music-info">
+
+                <h3>OO Madhu💖</h3>
+
+                <p>Chill Music</p>
+
+                <audio controls>
+
+                    <source
+                    src="audio2.mpeg"
+                    type="audio/mpeg">
+
+                </audio>
+
+            </div>
+
+        </div>
+
+
+        <!-- SONG 3 -->
+
+        <div class="music-card">
+
+            <img class="music-image"
+            src="https://i.pinimg.com/736x/f6/d1/cc/f6d1ccafd7ab8dd27e6240b3d17b8f23.jpg">
+            <div class="music-info">
+
+                <h3>GaalloThelinattundhe💞</h3>
+
+                <p>Energetic Beats</p>
+
+                <audio controls>
+
+                    <source
+                    src="audio8.mpeg"
+                    type="audio/mpeg">
+
+                </audio>
+
+            </div>
+
+        </div>
+
+
+        <!-- SONG 4 -->
+
+        <div class="music-card">
+
+            <img class="music-image"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrPtQOkFzbkjDy43ZY_WRGPfl_a2Rw3paxP7zXoz0Sp39SZOGZ2V9j4zM&s=10">
+            <div class="music-info">
+
+                <h3>Kissik💋</h3>
+
+                <p>Modern Rhythm</p>
+
+                <audio controls>
+
+                    <source
+                    src="audio6.mpeg"
+                    type="audio/mpeg">
+
+                </audio>
+
+            </div>
+
+        </div>
+
+
+        <!-- SONG 5 -->
+
+        <div class="music-card">
+
+            <img class="music-image"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM9lLX-FbzAvchekAqqfACPjKeU5r3C6Sg0zhCGeJDOVFp3i7FGX7Jlh4&s=10">
+            <div class="music-info">
+
+                <h3>BujiThalli💃</h3>
+
+                <p>Night Vibes</p>
+
+                <audio controls>
+
+                    <source
+                    src="audio7.mpeg"
+                    type="audio/mpeg">
+
+                </audio>
+
+            </div>
+
+        </div>
+
+
+        <!-- SONG 6 -->
+
+        <div class="music-card">
+
+            <img class="music-image"
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiswiGbH6QfpjGP_XZBMk3QwlMHOyhUI9e77l32nJNkppUXb7pMWezmzKIaCxrUjG8_0iHHO8EYZJUfq5rxMvaNriH9g-aOlV_hGuOUO1pOXtZ8hB1PMcOeFkJv9nvntqKfrhwO82n1sMcx/s1600/edited+1.JPG">
+
+            <div class="music-info">
+
+                <h3>Violin🎻</h3>
+
+                <p>Happy Beats</p>
+
+                <audio controls>
+
+                    <source
+                    src="audio5.mpeg"
+                    type="audio/mpeg">
+
+                </audio>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VIDEO BUTTON
+========================= -->
+
+<section class="video-area">
+
+    <h2>🎬 Ready for Videos?</h2>
+
+    <p>
+        Your music journey continues with amazing videos.
+    </p>
+
+    <button class="video-btn"
+            onclick="showVideos()">
+
+        Explore Videos 🎥
+
+    </button>
+
+</section>
+
+
+<!-- =========================
+     VIDEOS
+========================= -->
+
+<section class="video-section" id="videos">
+
+    <div class="section-title">
+
+        <h2>🎬 Explore Videos</h2>
+
+        <p>
+            Enjoy beautiful music videos
+        </p>
+
+    </div>
+
+
+    <div class="video-grid">
+
+
+        <!-- VIDEO 1 -->
+
+        <div class="video-card">
+
+            <video controls
+            poster="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80">
+
+                <source
+                src="https://youtu.be/zoBTw-1vzyY?si=5ekrwFPUC-q38BdC"
+                type="video/mp4">
+
+            </video>
+
+            <div class="video-info">
+
+                <h3>Live Music</h3>
+
+                <p>Feel the live performance</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 2 -->
+
+        <div class="video-card">
+
+            <video controls
+            poster="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=800&q=80">
+
+                <source
+                src="https://www.w3schools.com/html/movie.mp4"
+                type="video/mp4">
+
+            </video>
+
+            <div class="video-info">
+
+                <h3>Music Journey</h3>
+
+                <p>A beautiful musical journey</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 3 -->
+
+        <div class="video-card">
+
+            <video controls
+            poster="https://images.unsplash.com/photo-1521337581100-8ca9a73a5f79?auto=format&fit=crop&w=800&q=80">
+
+                <source
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                type="video/mp4">
+
+            </video>
+
+            <div class="video-info">
+
+                <h3>Summer Vibes</h3>
+
+                <p>Enjoy the summer rhythm</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 4 -->
+
+        <div class="video-card">
+
+            <video controls
+            poster="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=800&q=80">
+
+                <source
+                src="https://www.w3schools.com/html/movie.mp4"
+                type="video/mp4">
+
+            </video>
+
+            <div class="video-info">
+
+                <h3>Concert Night</h3>
+
+                <p>Experience the concert</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 5 -->
+
+        <div class="video-card">
+
+            <video controls
+            poster="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80">
+
+                <source
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                type="video/mp4">
+
+            </video>
+
+            <div class="video-info">
+
+                <h3>Festival Beats</h3>
+
+                <p>Music and celebration</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 6 -->
+
+        <div class="video-card">
+
+            <video controls
+            poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80">
+
+                <source
+                src="https://www.w3schools.com/html/movie.mp4"
+                type="video/mp4">
+
+            </video>
+
+            <div class="video-info">
+
+                <h3>Dance & Music</h3>
+
+                <p>Move with the rhythm</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     COMPLETE
+========================= -->
+
+<section class="complete-area">
+
+    <button class="complete-btn"
+            onclick="completeWebsite()">
+
+        Complete 🎉
+
+    </button>
+
+</section>
+
+
+<!-- =========================
+     THANK YOU
+========================= -->
+
+<section class="thank-you" id="thankYou">
+
+    <div class="thank-content">
+
+        <img
+        class="thank-image"
+        src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80"
+        alt="Music">
+
+        <div class="heart">
+            💖
+        </div>
+
+        <h2>
+            Thank You for Visiting!
+        </h2>
+
+        <p>
+            Keep listening, keep smiling and keep enjoying music 🎵
+        </p>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* Go to Music */
+
+function goToMusic() {
+
+    document.getElementById("music").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* Show Videos */
+
+function showVideos() {
+
+    const videos = document.getElementById("videos");
+
+    videos.classList.add("show");
+
+    setTimeout(function() {
+
+        videos.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }, 200);
+
+}
+
+
+/* Complete Website */
+
+function completeWebsite() {
+
+    const thankYou = document.getElementById("thankYou");
+
+    thankYou.classList.add("show");
+
+    setTimeout(function() {
+
+        thankYou.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }, 200);
+
+}
+
+</script>
+
+</body>
+</html>
